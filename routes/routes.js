@@ -7,8 +7,9 @@ const router = express.Router();
 router.get('/',getHomePage);
 
 //API routes
-router.get('/api/flashcards',getFlashCards); // render the flashcards page
+router.get('/api/flashcards',getAddFlashCards); // render the page to add new flashcards
 router.post('/api/flashcards',createFlashCard); // create a new flashcard
+router.get('/api/flashcards/view', getFlashCards); // get and view all flashcards
 router.delete('/api/flashcards/:id',deleteFlashCard); // delete a flashcard
 router.put('/api/flashcards/:id',updateFlashCard); // update a flashcard
 
