@@ -11,7 +11,7 @@ router.get('/',getHomePage);
 router.get('/api/flashcards',getAddFlashCards); // render the page to add new flashcards
 router.post('/api/flashcards/add',createFlashCard); // create a new flashcard
 router.get('/api/flashcards/view', getFlashCards); // get and view all flashcards
-router.delete('/api/flashcards/:id',deleteFlashCard); // delete a flashcard
-router.put('/api/flashcards/:id',updateFlashCard); // update a flashcard
+router.post('/api/flashcards/delete/:id',deleteFlashCard); // delete a flashcard
+router.post('/api/flashcards/update/:id',updateFlashCard); // update a flashcard
 
 export default router;

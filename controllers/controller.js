@@ -39,7 +39,7 @@ export const getFlashCards = async (req, res) => {
 };
 
 export const updateFlashCard = async (req, res) => {
-    const { id } = req.params;
+    const id  = parseInt(req.params.id);
     const { front, back } = req.body;
     try {
         await query('UPDATE flashcards SET front = $1, back = $2 WHERE id = $3', [front, back, id]);
@@ -51,7 +51,7 @@ export const updateFlashCard = async (req, res) => {
 };
 
 export const deleteFlashCard = async (req, res) => {
-    const { id } = req.params;
+    const id  = parseInt(req.params.id);
     try {
         await query('DELETE FROM flashcards WHERE id = $1', [id]);
         res.status(200).redirect('/api/flashcards/view');

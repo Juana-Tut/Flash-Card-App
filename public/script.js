@@ -26,6 +26,26 @@ function showCard(index) {
     nextButton.disabled = index === flashcards.length - 1;
 }
 
+// Function to toggle the flip state of a card
+function toggleFlip(event) {
+    event.currentTarget.classList.toggle('flipped');
+}
+
+// Initialize the app
+document.addEventListener('DOMContentLoaded', () => {
+    // Attach the flip event listener to each card
+    flashcards.forEach(card => {
+        card.addEventListener('click', toggleFlip);
+    });
+
+    // Show the first card
+    showCard(currentIndex);
+
+    // Attach event listeners to navigation buttons
+    prevButton.addEventListener('click', prevCard);
+    nextButton.addEventListener('click', nextCard);
+});
+
 // Navigation functions
 function prevCard() {
     if (currentIndex > 0) {
@@ -40,13 +60,3 @@ function nextCard() {
         showCard(currentIndex);
     }
 }
-
-// Initialize the app
-document.addEventListener('DOMContentLoaded', () => {
-    showCard(currentIndex);
-
-    // Attach event listeners to navigation buttons
-    prevButton.addEventListener('click', prevCard);
-    nextButton.addEventListener('click', nextCard);
-
-});
