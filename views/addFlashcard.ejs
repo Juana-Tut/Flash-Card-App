@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Flashcard</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div id="app">
+        <h1>Add a New Flashcard</h1>
+        <form id="flashcard-form" action="/api/flashcards/add" method="POST">
+            <input type="text" name="front" placeholder="Front of card" required>
+            <input type="text" name="back" placeholder="Back of card" required>
+            <button type="submit">Add Flashcard</button>
+        </form>
+        <a href="/" class="button">Back to Home</a>
+    </div>
+</body>
+</html>

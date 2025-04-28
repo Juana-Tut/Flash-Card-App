@@ -1,8 +1,9 @@
-import pool from '../config/db.js';
+import { query } from '../config/db.js';
 
 export const getHomePage = async (req, res) => {
     try {
-        res.render('index');
+        console.log('Home page loaded');
+        res.render("index");
     } catch (err) {
         res.status(500).send('Error loading home page');
     }
@@ -10,7 +11,7 @@ export const getHomePage = async (req, res) => {
 
 export const getAddFlashCards = async (req, res) => {
     try {
-        res.render('addFlashCards');
+        res.render('addFlashcard');
     } catch (err) {
         res.status(500).send('Error loading add flashcards page');
     }
@@ -19,8 +20,7 @@ export const getAddFlashCards = async (req, res) => {
 export const createFlashCard = async (req, res) => {
     const { front, back } = req.body;   
     try {
-        const query = 'INSERT INTO flashcards (front, back) VALUES ($1, $2)';
-        await pool.query(query, [front, back]);
+        await query('INSERT INTO flashcards (front, back) VALUES ($1, $2)', [front, back]);
         res.status(201).redirect('/api/flashcards/view');
     } catch (err) {
         console.error(err);
@@ -30,8 +30,7 @@ export const createFlashCard = async (req, res) => {
 
 export const getFlashCards = async (req, res) => {
     try {
-        const query = 'SELECT * FROM flashcards';
-        const { rows } = await pool.query(query);
+        const { rows } = await query('SELECT * FROM flashcards');
         res.render('viewFlashCards', { flashcards: rows });
     } catch (err) {
         console.error(err);
@@ -43,8 +42,7 @@ export const updateFlashCard = async (req, res) => {
     const { id } = req.params;
     const { front, back } = req.body;
     try {
-        const query = 'UPDATE flashcards SET front = $1, back = $2 WHERE id = $3';
-        await pool.query(query, [front, back, id]);
+        await query('UPDATE flashcards SET front = $1, back = $2 WHERE id = $3', [front, back, id]);
         res.status(200).redirect('/api/flashcards/view');
     } catch (err) {
         console.error(err);
@@ -55,8 +53,7 @@ export const updateFlashCard = async (req, res) => {
 export const deleteFlashCard = async (req, res) => {
     const { id } = req.params;
     try {
-        const query = 'DELETE FROM flashcards WHERE id = $1';
-        await pool.query(query, [id]);
+        await query('DELETE FROM flashcards WHERE id = $1', [id]);
         res.status(200).redirect('/api/flashcards/view');
     } catch (err) {
         console.error(err);

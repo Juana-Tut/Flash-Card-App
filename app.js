@@ -8,9 +8,9 @@ import route from './routes/routes.js';
 const app = express();
 
 app.use(express.urlencoded({extended:true}));
-app.use(express.static(path.join(process.cwd(), "public")));
-app.set("view engine", "ejs")
-app.set("views", path.join(process.cwd(), "views"))
+app.use(express.static(path.join(process.cwd(), 'public')));
+app.set('view engine', 'ejs')
+app.set('views', path.join(process.cwd(), 'views'))
 
 const loggingMiddleware= (req, res,next) => {
     const timestamp = new Date().toISOString();
@@ -19,9 +19,9 @@ const loggingMiddleware= (req, res,next) => {
 }
 
 app.use(loggingMiddleware)
-app.use("/",route);
+app.use('/',route);
 app.use((req,res) => {
-    res.status(404).send("404. Page Not Found. \n");
+    res.status(404).send('404. Page Not Found. \n');
 })
 
 const PORT = 3000;
