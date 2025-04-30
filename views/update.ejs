@@ -3,43 +3,26 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Edit Flashcard</title>
-</head>
-<body>
-    <h1>Edit Flashcard</h1>
-    <form action="/api/flashcards/update/<%= card.id %>" method="POST">
-        <input type="hidden" name="_method" value="PUT"> <!-- Required if using method-override -->
-        <label for="front">Front:</label>
-        <input type="text" id="front" name="front" value="<%= card.front %>" required>
-        <br>
-        <label for="back">Back:</label>
-        <input type="text" id="back" name="back" value="<%= card.back %>" required>
-        <br>
-        <button type="submit">Update</button>
-    </form>
-    <a href="/api/flashcards/view">Cancel</a>
-</body>
-</html><!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/styles.css">
     <title>Edit Flashcard</title>
 </head>
 <body>
     <div id="app">
         <h1>Edit Flashcard</h1>
-        <form action="/api/flashcards/update/<%= card.id %>" method="POST">
-            <label for="front">Front:</label>
-            <input type="text" id="front" name="front" value="<%= card.front %>" required>
-            <br>
-            <label for="back">Back:</label>
-            <input type="text" id="back" name="back" value="<%= card.back %>" required>
-            <br>
-            <button type="submit">Update</button>
-        </form>
-        <a href="/api/flashcards/view">Cancel</a>
+        <div class="form-container">
+            <form action="/api/flashcards/update/<%= card.id %>" method="POST">
+                <label for="front">Front:</label>
+                <input type="text" id="front" name="front" value="<%= card.front %>" required>
+                <br>
+                <label for="back">Back:</label>
+                <input type="text" id="back" name="back" value="<%= card.back %>" required>
+                <br>
+                <button type="submit">Update</button>
+                <a href="/api/flashcards/allFlashcards" class="button">Cancel</a>
+            </form>
+            
+        </div>
     </div>
+    <%-include('partials/footer')%>
 </body>
 </html>

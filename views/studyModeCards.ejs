@@ -15,21 +15,15 @@
                     <div class="flashcard" style="display: none;">
                         <div class="card">
                             <div class="card-front">
-                                <p><strong>Card <%= index + 1 %></strong></p> 
+                                <p><strong>Question:</strong></p> 
                                 <p><%= card.front %></p>
                             </div>
                             <div class="card-back">
+                                <p><strong>Answer:</strong></p> 
                                 <p><%= card.back %></p>
                             </div>
                         </div>
-                        <div class="button-container">
-                            <a href="/api/flashcards/update/<%= card.id %>" class="button">Edit</a>
-                            <form id="delete-form" action="/api/flashcards/delete/<%= card.id %>" method="POST" style="display: inline;">
-                                <button type="submit" onclick="return confirm('Are you sure?')">Delete</button>
-                            </form>
-                        </div>
                     </div>
-
                 <% }) %>
             <% } else { %>
                 <p>No flashcards available.</p>
@@ -46,5 +40,6 @@
         <a href="/" class="button">Back to Home</a>
     </div>
     <script src="/script.js"></script>
+    <%-include('partials/footer')%>
 </body>
 </html>

@@ -1,18 +1,15 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Flashcard App</title>
-    <link rel="stylesheet" href="/styles.css">
-</head>
+<%- include('partials/header')%>
 <body>
     <div id="app">
-        <h1>Welcome to Flashcard App</h1>
+        <header>
+            <h1>Welcome to Flashcard App</h1>
+        </header>
         <div id="home-buttons">
             <a href="/api/flashcards" class="button">Add a Card</a>
-            <a href="/api/flashcards/view" class="button">View All Cards</a>
+            <a href="/api/flashcards/view" class="button">Study Mode Cards</a>
+            <a href="/api/flashcards/allFlashcards" class="button">All Flashcards</a>
         </div>
     </div>
+    <%-include('partials/footer')%>
 </body>
 </html>

@@ -31,19 +31,37 @@ export const createFlashCard = async (req, res) => {
 export const getFlashCards = async (req, res) => {
     try {
         const { rows } = await query('SELECT * FROM flashcards');
-        res.render('viewFlashCards', { flashcards: rows });
+        res.render('studyModeCards', { flashcards: rows });
     } catch (err) {
         console.error(err);
         res.status(500).send('Error retrieving flashcards');
     }
 };
+export const getUpdateFlashCard = async (req, res) => {
+    const cardId = req.params.id; // Get the card ID from the URL
+    try {
+        // Fetch the flashcard from the database
+        const result = await query('SELECT * FROM flashcards WHERE id = $1', [cardId]);
+        const card = result.rows[0]; // Assuming you're using PostgreSQL
+
+        if (!card) {
+            return res.status(404).send('Flashcard not found');
+        }
+
+        // Render the update.ejs template and pass the card object
+        res.render('update', { card });
+    } catch (err) {
+        console.error(err);
+        res.status(500).send('Error fetching flashcard');
+    }
+}; // render the page to update a flashcard
 
 export const updateFlashCard = async (req, res) => {
     const id  = parseInt(req.params.id);
     const { front, back } = req.body;
     try {
         await query('UPDATE flashcards SET front = $1, back = $2 WHERE id = $3', [front, back, id]);
-        res.status(200).redirect('/api/flashcards/view');
+        res.status(200).redirect('/');
     } catch (err) {
         console.error(err);
         res.status(500).send('Error updating flashcard');
@@ -58,5 +76,15 @@ export const deleteFlashCard = async (req, res) => {
     } catch (err) {
         console.error(err);
         res.status(500).send('Error deleting flashcard');
+    }
+};
+
+export const getAllFlashCards = async (req, res) => {
+    try {
+        const { rows } = await query('SELECT * FROM flashcards');
+        res.render('allCards', { flashcards: rows }); // Render EJS template
+    } catch (err) {
+        console.error(err);
+        res.status(500).send('Error retrieving flashcards');
     }
 };

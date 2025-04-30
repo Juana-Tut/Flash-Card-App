@@ -9,12 +9,17 @@
 <body>
     <div id="app">
         <h1>Add a New Flashcard</h1>
-        <form id="flashcard-form" action="/api/flashcards/add" method="POST">
-            <input type="text" name="front" placeholder="Front of card" required>
-            <input type="text" name="back" placeholder="Back of card" required>
-            <button type="submit">Add Flashcard</button>
-        </form>
-        <a href="/" class="button">Back to Home</a>
+        <div class="form-container">
+            <form id="flashcard-form" action="/api/flashcards/add" method="POST">
+                <input type="text" name="front" placeholder="Front of card" required>
+                <input type="text" name="back" placeholder="Back of card" required>
+                <button type="submit">Add Flashcard</button>
+                <a href="/" class="button">Back to Home</a>
+            </form>
+            
+        </div>
+        
     </div>
+    <%-include('partials/footer')%>
 </body>
 </html>
