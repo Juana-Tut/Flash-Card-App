@@ -8,18 +8,16 @@
 </head>
 <body>
     <div id="app">
-        <h1>All Flashcards</h1>
         <div id="flashcard-container">
             <% if (flashcards.length > 0) { %>
                 <% flashcards.forEach((card, index) => { %>
                     <div class="flashcard" style="display: none;">
                         <div class="card">
                             <div class="card-front">
-                                <p><strong>Question:</strong></p> 
+                                <p style="text-align:right;"><%= index +1%>/<%= flashcards.length %></p>
                                 <p><%= card.front %></p>
                             </div>
                             <div class="card-back">
-                                <p><strong>Answer:</strong></p> 
                                 <p><%= card.back %></p>
                             </div>
                         </div>
@@ -31,11 +29,10 @@
         </div>
         <% if (flashcards.length > 0) { %>
             <div id="navigation">
-                <button onclick="prevCard()">&#8592; Previous</button>
-                <span id="card-number">Card 1 of <%= flashcards.length %></span>
-                <button onclick="nextCard()">Next &#8594;</button>
-
-                </div>
+                <button onclick="prevCard()">&#8592; </button>
+                <span id="card-number"></span>
+                <button onclick="nextCard()">&#8594;</button>
+            </div>
         <% } %>
         <a href="/" class="button">Back to Home</a>
     </div>

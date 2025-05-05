@@ -1,27 +1,31 @@
 html,body {
-    font-family: Arial, sans-serif;
+    font-family: "DynaPuff", serif;
     margin: 0;
     padding: 0;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    height: 100vh;
+    min-height: 100vh;
     width: 100vw; 
-    background-color: #f4f4f4;
+    background-color: #ebedee;
     place-items: center;
+    overflow-y:auto ;
+    background-image: linear-gradient(120deg, #fdfbfb 0%, #ebedee 100%);
 }
 
 #app {
-    height: 80vh;
+    min-height: 80vh;
     width: 80vw; 
-    background: rgb(191, 247, 247);
+    background: #c3d9e4;
     padding: 20px;
     border-radius: 8px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     text-align: center;
-    justify-content: center; /* Center content horizontally */
-    align-items: center; /
+    justify-content: center; 
+    align-items: center; 
+    display: flex;
+    flex-direction: column;
 }
 
 h1 {
@@ -40,16 +44,39 @@ form {
     margin-bottom: 20px;
 }
 
-input {
-    margin-bottom: 10px;
+.form-group {
+    display: flex;
+    flex-direction: row;
+    text-align: center;
+    margin: 20px;
+    padding: 10px;
+}
+#textarea{
+    display: flex;
+    flex-direction: column;
+}
+
+label {
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.input-large {
+    width: 400px; /* Full width of the container */
+    height: 200px; /* Make the input box taller */
     padding: 10px;
     font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    resize: none; /* Prevent resizing for a consistent look */
+    margin: 20px; /* Add spacing between input boxes */
 }
 
 button, .button {
     padding: 10px;
     font-size: 16px;
-    background: #007bff;
+    background: #0556be;
     color: white;
     border: none;
     border-radius: 4px;
@@ -78,8 +105,8 @@ button:hover, .button:hover {
 }
 #flashcard-container {
     display: flex;
-    width: 50%;
-    height: 50%;
+    width: 80%;
+    height: 60%;
     transform-style: preserve-3d; 
     transition: transform 0.6s; 
     justify-content: center;
@@ -91,12 +118,14 @@ button:hover, .button:hover {
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 100%;
-    height: 100%;
+    width: 750px;
+    height: 500px;
     padding: 20px;
     color: black;
     margin-bottom: 10px;
-    text-align: left;
+    text-align: center;
+    font-size: xx-large;
+    font-weight: bold;
 }
 
 .card {
@@ -126,12 +155,13 @@ button:hover, .button:hover {
 }
 
 .card-front {
-    background-color: #ffffff;
+    background-color: #2E5077;
+    color:#fff
 }
 
 .card-back {
-    background-color: rgb(180, 247, 247);
-    color: black;
+    background-color: #A5BFCC;
+    color: white;
     transform: rotateY(180deg); /* Flip the back side */
 }
 .flashcard.flipped .card {
@@ -158,6 +188,6 @@ th {
     font-weight: bold;
 }
 tr {
-    background-color: #f9f9f9; /* Optional: Add zebra striping */
+    background-color: #f9f9f9;
 }
 

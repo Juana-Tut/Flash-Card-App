@@ -20,8 +20,12 @@ export const getAddFlashCards = async (req, res) => {
 export const createFlashCard = async (req, res) => {
     const { front, back } = req.body;   
     try {
+         // Validate input
+         if (!front || !back) {
+            return res.status(400).json({ error: "Both 'front' and 'back' fields are required." });
+        }
         await query('INSERT INTO flashcards (front, back) VALUES ($1, $2)', [front, back]);
-        res.status(201).redirect('/api/flashcards/view');
+        res.status(201).redirect('/api/flashcards/allFlashcards');
     } catch (err) {
         console.error(err);
         res.status(500).send('Error creating flashcard');
@@ -42,7 +46,7 @@ export const getUpdateFlashCard = async (req, res) => {
     try {
         // Fetch the flashcard from the database
         const result = await query('SELECT * FROM flashcards WHERE id = $1', [cardId]);
-        const card = result.rows[0]; // Assuming you're using PostgreSQL
+        const card = result.rows[0]; 
 
         if (!card) {
             return res.status(404).send('Flashcard not found');
@@ -61,7 +65,7 @@ export const updateFlashCard = async (req, res) => {
     const { front, back } = req.body;
     try {
         await query('UPDATE flashcards SET front = $1, back = $2 WHERE id = $3', [front, back, id]);
-        res.status(200).redirect('/');
+        res.status(200).redirect('/api/flashcards/allFlashcards');
     } catch (err) {
         console.error(err);
         res.status(500).send('Error updating flashcard');
@@ -72,7 +76,7 @@ export const deleteFlashCard = async (req, res) => {
     const id  = parseInt(req.params.id);
     try {
         await query('DELETE FROM flashcards WHERE id = $1', [id]);
-        res.status(200).redirect('/api/flashcards/view');
+        res.status(200).redirect('/api/flashcards/allFlashcards');
     } catch (err) {
         console.error(err);
         res.status(500).send('Error deleting flashcard');
