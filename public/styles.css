@@ -55,18 +55,23 @@ form {
     display: flex;
     flex-direction: column;
 }
+.error-input {
+    border: 2px solid red;
+}
+.success-input {
+    border: 2px solid green;
+}
 
 label {
     font-weight: bold;
     margin-bottom: 5px;
 }
 
-.input-large {
+#input-large {
     width: 400px; /* Full width of the container */
     height: 200px; /* Make the input box taller */
     padding: 10px;
     font-size: 16px;
-    border: 1px solid #ccc;
     border-radius: 4px;
     box-sizing: border-box;
     resize: none; /* Prevent resizing for a consistent look */

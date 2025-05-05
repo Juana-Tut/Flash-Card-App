@@ -11,11 +11,18 @@
         <h1>Add New Flashcard</h1>
         <form action="/api/flashcards/add" method="POST" id="add-flashcard-form">
             <div class="form-group">
-                <label for="front"></label> 
-                <textarea name="front" class="input-large" required placeholder="Enter the front text of the card"></textarea>
-                <br>
-                <label for="back"></label>
-                <textarea class="input-large" name="back" required placeholder="Enter the back text of the card"></textarea>
+                <div id="textarea">
+                    <% if (error.front) { %>
+                        <span class="error"><%= error.front %></span><br>
+                    <% } %>
+                    <textarea name="front" class="<%= error.front ? 'error-input' : 'success-input' %>" id="input-large"  placeholder="Enter the front text of the card" ><%= front || '' %></textarea>
+                </div>
+                <div id="textarea">   
+                    <% if (error.back) { %>
+                        <span class="error"><%= error.back %></span><br>
+                    <% } %>
+                    <textarea class="<%= error.back ? 'error-input' : 'success-input' %>" id="input-large" name="back"  placeholder="Enter the back text of the card"><%= back || '' %></textarea>
+                </div>
             </div>
     
             <div id="navigation">

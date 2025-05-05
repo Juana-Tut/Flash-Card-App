@@ -11,22 +11,38 @@ export const getHomePage = async (req, res) => {
 
 export const getAddFlashCards = async (req, res) => {
     try {
-        res.render('addFlashcard');
+        res.render('addFlashcard', { error: {}, front: '', back: '' });;
     } catch (err) {
         res.status(500).send('Error loading add flashcards page');
     }
 };
 
 export const createFlashCard = async (req, res) => {
-    const { front, back } = req.body;   
-    try {
-         // Validate input
-         if (!front || !back) {
-            return res.status(400).json({ error: "Both 'front' and 'back' fields are required." });
+    const { front, back } = req.body;  
+    let error = {}; 
+     // Validate input
+     if (!front) {
+        error.front = 'Front side is required';
+    }
+    if (!back) {
+        error.back = 'Back side is required';
+    }
+
+    if (Object.keys(error).length > 0) {
+        try {
+            const flashcards = await query('SELECT * FROM flashcards');
+            return res.render('addFlashcard', { error, flashcards,front, back });
         }
+        catch (err) {
+            console.error(err);
+            return res.status(500).send('Error retrieving flashcards');
+        }
+   
+    }
+    try {
         await query('INSERT INTO flashcards (front, back) VALUES ($1, $2)', [front, back]);
         res.status(201).redirect('/api/flashcards/allFlashcards');
-    } catch (err) {
+    }catch(err) {
         console.error(err);
         res.status(500).send('Error creating flashcard');
     }
